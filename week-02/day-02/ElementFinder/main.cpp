@@ -26,11 +26,12 @@ std::string containsSeven(const std::vector<int>& numbers)
     for (int i=0; i < numbers.size(); ++i){
 
         if (numbers[i] == 7){
-            return "Hoorray";
+            return "Huurray";
         }else{
-            return "Nooooo";
+            i++;
         }
     }
+    return "Noooooo";
 }
 
 std::string containsSeven_stdfind(const std::vector<int>& numbers)

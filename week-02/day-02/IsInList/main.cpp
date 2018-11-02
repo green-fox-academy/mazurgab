@@ -13,8 +13,6 @@ int main(int argc, char* args[])
     // Create a method that accepts vector as an input
     // it should return "true" if it contains all, otherwise "false"
 
-
-    // Expected output: "Noooooo"
     if(checkNums(numbers, checker)){
         std::cout << "Good :)" << std::endl;
     }
@@ -25,21 +23,12 @@ int main(int argc, char* args[])
     return 0;
 }
 
-bool checkNums (const std::vector<int> numbers, const std::vector<int> checker){
+bool checkNums (const std::vector<int> numbers, const std::vector<int> checker) {
 
-    for (int i=0; i < numbers.size(); ++i)
+    bool IsInList = true;
+    for (int i = 0; i < checker.size(); ++i) {
+        IsInList=(std::find(numbers.begin(), numbers.end(), checker[i]) != numbers.end());
 
-        if(
-                std::find(std::find(numbers.begin(), numbers.end(), 4) != numbers.end())
-                std::find(std::find(numbers.begin(), numbers.end(), 8) != numbers.end())
-                std::find(std::find(numbers.begin(), numbers.end(), 12) != numbers.end())
-                std::find(std::find(numbers.begin(), numbers.end(), 16) != numbers.end())
-
-
-    ){
-            return true;
-        }else{
-            return false;
-        }
-
+    }
+    return IsInList;
 }
