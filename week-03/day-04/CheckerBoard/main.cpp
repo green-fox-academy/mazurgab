@@ -2,7 +2,7 @@
 #include <SDL.h>
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 640;
+const int SCREEN_WIDTH = 480;
 const int SCREEN_HEIGHT = 480;
 
 //Draws geometry on the canvas
@@ -20,30 +20,37 @@ SDL_Window* gWindow = nullptr;
 //The window renderer
 SDL_Renderer* gRenderer = nullptr;
 
-void Rainbow (int x, int y);
-
 void draw()
 {
-    // Create a square drawing function that takes 2 parameters:
-    // The square size, and the fill color,
-    // and draws a square of that size and color to the center of the canvas.
-    // Create a loop that fills the canvas with rainbow colored squares.
+    // Fill the canvas with a checkerboard pattern.
+    int a = 8; //change the checkerboard pattern
+    int size = SCREEN_HEIGHT / a;
 
-    for (int i=1; i<200; i += 10){
-        for(int j=1; j<20; j++){
-            Rainbow(i,j);
-            i +=10;
+    for (int i=0; i<SCREEN_WIDTH + 1; i += size){
+        for (int j=0; j<SCREEN_HEIGHT + 1; j += size){
+            if (i%(size * 2) ==0 && j%(size * 2)!=0){
+                SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0x00 );
+            }else if(i%(size*2)==size && j%(size*2) == 0){
+                SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0x00 );
+            }else{
+                SDL_SetRenderDrawColor( gRenderer, 255, 255, 255, 0x00 );
+            }
+            SDL_Rect fillRect = {i, j, size, size};
+            SDL_RenderFillRect( gRenderer, &fillRect);
+
+            SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 255 );
+
+            SDL_Rect r;
+            r.x = i;
+            r.y = j;
+            r.w = size;
+            r.h = size;
+
+            SDL_RenderDrawRect( gRenderer, &r );
+
         }
 
     }
-}
-
-void Rainbow (int x, int y){
-
-    SDL_SetRenderDrawColor( gRenderer, 0 + (12 * y), 0 - (12 * y), 0, 0x00 );
-    SDL_Rect fillRect = {SCREEN_WIDTH/2 - (200 - x)/2, SCREEN_HEIGHT/2 - (200 - x)/2, 200-x, 200-x};
-    SDL_RenderFillRect( gRenderer, &fillRect);
-
 }
 
 bool init()
@@ -56,7 +63,7 @@ bool init()
     }
 
     //Create window
-    gWindow = SDL_CreateWindow( "Rainbow box function", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+    gWindow = SDL_CreateWindow( "Checkerboard", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
     if( gWindow == nullptr )
     {
         std::cout << "Window could not be created! SDL Error: " << SDL_GetError() << std::endl;

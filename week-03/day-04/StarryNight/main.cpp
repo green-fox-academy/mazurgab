@@ -1,5 +1,8 @@
 #include <iostream>
 #include <SDL.h>
+#include <time.h>
+#include <stdlib.h>
+#include <cstdlib>
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
@@ -20,29 +23,27 @@ SDL_Window* gWindow = nullptr;
 //The window renderer
 SDL_Renderer* gRenderer = nullptr;
 
-void Rainbow (int x, int y);
-
 void draw()
 {
-    // Create a square drawing function that takes 2 parameters:
-    // The square size, and the fill color,
-    // and draws a square of that size and color to the center of the canvas.
-    // Create a loop that fills the canvas with rainbow colored squares.
+    // Draw the night sky:
+    //  - The background should be black
+    //  - The stars can be small squares
+    //  - The stars should have random positions on the canvas
+    //  - The stars should have random color (some shade of grey)
+    //
+    // You might have to make modifications somewhere else to create a black background ;)
 
-    for (int i=1; i<200; i += 10){
-        for(int j=1; j<20; j++){
-            Rainbow(i,j);
-            i +=10;
-        }
-
-    }
-}
-
-void Rainbow (int x, int y){
-
-    SDL_SetRenderDrawColor( gRenderer, 0 + (12 * y), 0 - (12 * y), 0, 0x00 );
-    SDL_Rect fillRect = {SCREEN_WIDTH/2 - (200 - x)/2, SCREEN_HEIGHT/2 - (200 - x)/2, 200-x, 200-x};
+    SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0xFF);
+    SDL_Rect fillRect = {0, 0, 640, 480};
     SDL_RenderFillRect( gRenderer, &fillRect);
+
+    int color = rand()%255;
+
+    for (int i=0; i<800; i++){
+        SDL_SetRenderDrawColor( gRenderer, color, color, color, 0xFF);
+        SDL_Rect fillRect2 = {rand()%640 + 1, rand() % 480 + 1, 2, 2};
+        SDL_RenderFillRect( gRenderer, &fillRect2);
+    }
 
 }
 
@@ -56,7 +57,7 @@ bool init()
     }
 
     //Create window
-    gWindow = SDL_CreateWindow( "Rainbow box function", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+    gWindow = SDL_CreateWindow( "Starry night", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
     if( gWindow == nullptr )
     {
         std::cout << "Window could not be created! SDL Error: " << SDL_GetError() << std::endl;
@@ -90,6 +91,7 @@ void close()
 
 int main( int argc, char* args[] )
 {
+    srand(time(nullptr));
     //Start up SDL and create window
     if( !init() )
     {
@@ -104,6 +106,8 @@ int main( int argc, char* args[] )
     //Event handler
     SDL_Event e;
 
+    bool once = true;
+
     //While application is running
     while( !quit ) {
         //Handle events on queue
@@ -114,14 +118,19 @@ int main( int argc, char* args[] )
             }
         }
 
-        //Clear screen
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(gRenderer);
+        if(once) {
 
-        draw();
+            //Clear screen
+            SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+            SDL_RenderClear(gRenderer);
 
-        //Update screen
-        SDL_RenderPresent(gRenderer);
+            draw();
+
+            //Update screen
+            SDL_RenderPresent(gRenderer);
+
+            once = false;
+        }
     }
 
     //Free resources and close SDL
