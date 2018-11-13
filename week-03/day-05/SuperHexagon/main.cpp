@@ -2,8 +2,8 @@
 #include <SDL.h>
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 480;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 800;
 
 //Draws geometry on the canvas
 void draw();
@@ -20,27 +20,40 @@ SDL_Window* gWindow = nullptr;
 //The window renderer
 SDL_Renderer* gRenderer = nullptr;
 
+void DrawHex(int x, int y);
+
 void draw()
 {
 
-    //upwards
-    for (int i=0; i<38; ++i){
-        SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0xFF );
-        SDL_RenderDrawLine(gRenderer, 16 + (i * 8), SCREEN_HEIGHT-15 - (i * 15), SCREEN_WIDTH-16 - (i * 8), SCREEN_HEIGHT-15 - (i * 15));
 
 
-    //to the right
+}
 
-        SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0xFF );
-        SDL_RenderDrawLine(gRenderer, 16 + (i * 16), SCREEN_HEIGHT-15, SCREEN_WIDTH/2 + (i * 8), SCREEN_HEIGHT-15 - (8 * 15)+(i * 15));
+void DrawHex(int x, int y){
+    //1
+    SDL_SetRenderDrawColor( gRenderer, 160, 32, 240, 0xFF );
+    SDL_RenderDrawLine(gRenderer, x, y, x + 60, y);
 
+    //2
+    SDL_SetRenderDrawColor( gRenderer, 160, 32, 240, 0xFF );
+    SDL_RenderDrawLine(gRenderer, x + 60, y, x + 90, y + 52);
 
-    //to the left
-        SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0xFF );
-        SDL_RenderDrawLine(gRenderer, SCREEN_WIDTH - 16 - (i * 16), SCREEN_HEIGHT-15, SCREEN_WIDTH/2 - (i * 8), SCREEN_HEIGHT-15 - (20 * 15 ) + (i * 15));
+    //3
+    SDL_SetRenderDrawColor( gRenderer, 160, 32, 240, 0xFF );
+    SDL_RenderDrawLine(gRenderer, x + 90, y + 52, x + 60, y + 104);
 
+    //4
+    SDL_SetRenderDrawColor( gRenderer, 160, 32, 240, 0xFF );
+    SDL_RenderDrawLine(gRenderer, x + 60, y + 104, x, y + 104);
 
-    }
+    //5
+    SDL_SetRenderDrawColor( gRenderer, 160, 32, 240, 0xFF );
+    SDL_RenderDrawLine(gRenderer, x, y + 104, x - 30, y + 52);
+
+    //6
+    SDL_SetRenderDrawColor( gRenderer, 160, 32, 240, 0xFF );
+    SDL_RenderDrawLine(gRenderer, x - 30, y + 52, x, y);
+
 }
 
 bool init()
@@ -53,7 +66,7 @@ bool init()
     }
 
     //Create window
-    gWindow = SDL_CreateWindow( "Triangles", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+    gWindow = SDL_CreateWindow( "Checkerboard", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
     if( gWindow == nullptr )
     {
         std::cout << "Window could not be created! SDL Error: " << SDL_GetError() << std::endl;
