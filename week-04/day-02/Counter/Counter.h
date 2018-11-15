@@ -14,7 +14,7 @@ public:
 
 private:
     int _value;
-    int _initialValue = _value;
+    int _initialValue = 0;
 
 
 };

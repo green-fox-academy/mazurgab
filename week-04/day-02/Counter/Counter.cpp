@@ -2,6 +2,7 @@
 
 Counter::Counter(){
     _value = 0;
+    _initialValue = 0;
 }
 
 Counter::Counter(int value){
@@ -22,6 +23,7 @@ int Counter::get(){
 }
 
 int Counter::reset(){
+    _value = _initialValue;
     return _initialValue;
 }
 
