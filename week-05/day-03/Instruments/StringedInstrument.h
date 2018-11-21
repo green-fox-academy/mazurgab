@@ -3,13 +3,14 @@
 
 #include "Instrument.h"
 
-class StringedInstrument : public Instrument
-        {
-        public:
-            virtual void sound() = 0;
+class StringedInstrument : public Instrument {
+public:
+    StringedInstrument(int numberOfString);
 
-        protected:
-            int _numberOfString;
+    virtual std::string sound() = 0;
+
+protected:
+    int _numberOfString;
 };
 
 
