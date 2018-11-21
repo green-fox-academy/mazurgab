@@ -5,9 +5,10 @@
 
 class Violin : public StringedInstrument {
 public:
+    Violin();
     Violin(int numberOfString);
     std::string sound() override;
-    void play();
+    void play() override;
 
 protected:
     std::string _name;

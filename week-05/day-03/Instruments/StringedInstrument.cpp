@@ -1,3 +1,6 @@
 #include "StringedInstrument.h"
 
-StringedInstrument::StringedInstrument(int numberOfString) : _numberOfString(numberOfString) {}
+
+StringedInstrument::StringedInstrument(std::string name, int numberOfStrings) : Instrument(name), _numberOfString(numberOfStrings){
+
+}

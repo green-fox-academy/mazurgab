@@ -1,9 +1,12 @@
 #include "BassGuitar.h"
 #include <iostream>
 
-BassGuitar::BassGuitar(int numberOfString) : StringedInstrument(numberOfString) {
+BassGuitar::BassGuitar() : StringedInstrument("Bass Guitar", 4) {
     _name = "Bass Guitar";
-    _numberOfString = 4;
+}
+
+BassGuitar::BassGuitar(int numberOfStrings): StringedInstrument("Bass Guitar", numberOfStrings) {
+    _name = "Bass Guitar";
 }
 
 std::string BassGuitar::sound() {

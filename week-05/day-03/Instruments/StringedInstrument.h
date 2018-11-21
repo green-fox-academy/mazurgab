@@ -5,9 +5,10 @@
 
 class StringedInstrument : public Instrument {
 public:
-    StringedInstrument(int numberOfString);
+    StringedInstrument(std::string name, int numberOfStrings);
 
     virtual std::string sound() = 0;
+    virtual void play() = 0;
 
 protected:
     int _numberOfString;

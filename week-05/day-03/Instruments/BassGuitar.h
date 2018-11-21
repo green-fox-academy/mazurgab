@@ -5,9 +5,10 @@
 
 class BassGuitar : public StringedInstrument{
 public:
+    BassGuitar();
     BassGuitar(int numberOfString);
     std::string sound() override;
-    void play();
+    void play() override;
 
 protected:
     std::string _name;

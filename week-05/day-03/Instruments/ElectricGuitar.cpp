@@ -2,9 +2,12 @@
 #include <iostream>
 
 
-ElectricGuitar::ElectricGuitar(int numberOfString) : StringedInstrument(numberOfString) {
+ElectricGuitar::ElectricGuitar() : StringedInstrument("Electric Guitar", 6) {
     _name = "Electric Guitar";
-    _numberOfString = 6;
+}
+
+ElectricGuitar::ElectricGuitar(int numberOfStrings): StringedInstrument("Electric Guitar", numberOfStrings) {
+    _name = "Electric Guitar";
 }
 
 std::string ElectricGuitar::sound() {
@@ -14,3 +17,4 @@ std::string ElectricGuitar::sound() {
 void ElectricGuitar::play() {
     std::cout<<_name<<", a "<<_numberOfString<<"-stringed instrument that goes "<<ElectricGuitar::sound()<<std::endl;
 }
+
