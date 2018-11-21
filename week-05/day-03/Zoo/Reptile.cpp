@@ -7,5 +7,5 @@ std::string Reptile::getName() {
 }
 
 std::string Reptile::breed() {
-    return "an egg";
+    return "laying eggs";
 }

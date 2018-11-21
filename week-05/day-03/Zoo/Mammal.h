@@ -6,8 +6,8 @@
 class Mammal : public Animal{
 public:
     Mammal(const std::string &name);
-    std::string getName();
-    std::string breed();
+    std::string getName() override;
+    std::string breed() override;
 
 };
 
