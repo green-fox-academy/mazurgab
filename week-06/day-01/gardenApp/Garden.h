@@ -4,18 +4,35 @@
 #include <iostream>
 #include <vector>
 
+enum class Type{
+    FLOWER,
+    TREE
+};
 
 class Garden {
 public:
 
-    Garden(std::string name, int waterAmount);
+    Garden(std::string name, float waterAmount);
 
-    virtual void water(int Amount, std::vector<Garden> plants);
-    bool needsWater();
+    Garden();
+
+    virtual void getState();
+
+    void addPlant(Garden* plants);
+
+    virtual bool needsWater();
+
+    void distributeWater(float Amount);
+
+    virtual void watering(float water);
+
+    void PrintGarden();
 
 protected:
-    int _waterAmount;
+    float _waterAmount;
     std::string _name;
+    std::vector<Garden*> _plants;
+    int _needsWatering = 0;
 };
 
 

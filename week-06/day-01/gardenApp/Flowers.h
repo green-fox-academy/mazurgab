@@ -6,10 +6,14 @@
 
 class Flowers : public Garden{
 public:
+    Flowers(std::string name, float waterAmount);
 
+    void getState() override;
 
-protected:
-    int _waterAmount;
+    bool needsWater() override;
+
+    void watering(float water) override;
+
 };
 
 

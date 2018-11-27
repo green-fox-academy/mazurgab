@@ -2,27 +2,39 @@
 #include <iostream>
 
 
-Garden::Garden(std::string name, int waterAmount) : _name(name), _waterAmount(waterAmount) {}
+Garden::Garden(std::string name, float waterAmount) : _name(name), _waterAmount(waterAmount) {}
 
-void Garden::water(int Amount, std::vector<Garden> plants) {
-    int counter;
-    for (int i = 0; i < plants.size(); ++i) {
-        if (plants[i].needsWater() == true) {
-            counter++;
-        }
-    }
-    for (int j=0; j<counter; j++){
-        if (plants[j].needsWater() == true){
-            _waterAmount += Amount/counter;
-        }
+Garden::Garden() {}
+
+void Garden::getState() {
+}
+
+void Garden::addPlant(Garden *plants) {
+    _plants.push_back(plants);
+    if(plants->needsWater()){
+        _needsWatering++;
     }
 }
 
+void Garden::distributeWater(float Amount) {
+    for (int i = 0; i <_plants.size() ; ++i) {
+        if(_plants[i]->needsWater())
+            _plants[i]->watering(Amount/_needsWatering);
+    }
+    std::cout<<"Watering with "<<Amount<<std::endl;
+}
+
+void Garden::PrintGarden() {
+    for (int i = 0; i <_plants.size() ; ++i) {
+        _plants[i]->getState();
+    }
+}
 
 bool Garden::needsWater() {
-    if (_waterAmount<5){
-        return true;
-    }else{
-        return false;
-    }
+    return false;
 }
+
+void Garden::watering(float water) {
+
+}
+
