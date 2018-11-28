@@ -11,14 +11,23 @@ enum class Type{
 class Aircrafts {
 public:
     Aircrafts();
+
+    Aircrafts(int ammo, int baseDamage, int maxAmmo, Type type, bool priority);
+
     void fight();
-    void refill(int &reAmmo);
+    int refill(int &reAmmo);
     std::string getType();
     std::string getStatus();
     bool isPriority();
+    int getAmmo() const;
+    int getMaxAmmo() const;
 
 protected:
     int _ammo;
+public:
+    void setAmmo(int ammo);
+
+protected:
     int _baseDamage;
     int _maxAmmo;
     Type _type;

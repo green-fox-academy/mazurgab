@@ -8,13 +8,18 @@ void Aircrafts::fight() {
     std::cout<<"Out of ammo"<<std::endl;
 }
 
-void Aircrafts::refill(int &reAmmo) {
-    int x = 0;
-    _maxAmmo - _ammo == x;
-    _ammo = _maxAmmo;
-    reAmmo -= x;
-    std::cout<<"Refilled ammo to max("<<_maxAmmo<<") on aircraft"<<std::endl;
-    std::cout<<"Remaining ammo: "<<reAmmo<<std::endl;
+int Aircrafts::refill(int &reAmmo) {
+    if (_ammo != _maxAmmo){
+        while (_ammo != _maxAmmo){
+            _ammo++;
+            reAmmo--;
+        }
+        std::cout<<"Refilled ammo to max("<<_maxAmmo<<") on aircraft"<<std::endl;
+        std::cout<<"Remaining ammo: "<<reAmmo<<std::endl;
+    }else{
+        std::cout<<"Aircraft has max ammo"<<std::endl;
+    }
+    return reAmmo;
 }
 
 std::string Aircrafts::getType() {
@@ -35,4 +40,21 @@ std::string Aircrafts::getStatus() {
 
 bool Aircrafts::isPriority() {
     return _priority;
+}
+
+int Aircrafts::getAmmo() const {
+    return _ammo;
+}
+
+int Aircrafts::getMaxAmmo() const {
+    return _maxAmmo;
+}
+
+Aircrafts::Aircrafts(int ammo, int baseDamage, int maxAmmo, Type type, bool priority) : _ammo(ammo),
+                                                                                        _baseDamage(baseDamage),
+                                                                                        _maxAmmo(maxAmmo), _type(type),
+                                                                                        _priority(priority) {}
+
+void Aircrafts::setAmmo(int ammo) {
+    _ammo = ammo;
 }
