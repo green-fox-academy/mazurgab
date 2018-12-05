@@ -4,11 +4,6 @@
 #include <iostream>
 #include <vector>
 
-enum class Type{
-    FLOWER,
-    TREE
-};
-
 class Garden {
 public:
 
@@ -36,4 +31,4 @@ protected:
 };
 
 
-#endif //GARDENAPP_GARDEN_H
+#endif

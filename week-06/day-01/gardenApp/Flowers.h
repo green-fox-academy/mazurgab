@@ -17,4 +17,4 @@ public:
 };
 
 
-#endif //GARDENAPP_FLOWERS_H
+#endif
