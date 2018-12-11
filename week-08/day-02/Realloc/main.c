@@ -29,5 +29,7 @@ int main()
         printf("%d ,", pointer[j]);
     }
 
+    free(pointer);
+
     return 0;
 }
