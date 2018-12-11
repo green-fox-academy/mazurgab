@@ -1,0 +1,1 @@
+add_library(poker Card.h Card.cpp Poker.h Poker.cpp)
