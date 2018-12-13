@@ -11,7 +11,31 @@
 
 //For example: 0,0,0,0,128,4,0,0,2,0,512,0,0,0,0,0,0,32,0,64,0,0,1,8,0,0,16,256
 
+void winnerRelatives(int* RelativesArray, int relatives, int remainingMoney);
+
 int main()
 {
+    srand(time(NULL));
+    int relatives = (rand() % 31) + 20 ;
+    printf("Number of relatives: %d\n", relatives);
+
+    int* RelativesArray = (int*) calloc (relatives, sizeof(int));
+
+    winnerRelatives(RelativesArray, relatives, 1024);
+
+    for (int i = 0; i < relatives; ++i) {
+        printf("The %d relative gets %d money\n", i + 1, RelativesArray[i]);
+    }
+
     return 0;
+}
+
+void winnerRelatives(int* RelativesArray, int relatives, int remainingMoney) {
+
+    int rich = rand() % relatives;
+    remainingMoney /= 2;
+    if(remainingMoney > 0){
+        RelativesArray[rich] += remainingMoney;
+        winnerRelatives(RelativesArray, relatives, remainingMoney);
+    }
 }
