@@ -27,6 +27,8 @@ int main()
         printf("The %d relative gets %d money\n", i + 1, RelativesArray[i]);
     }
 
+    free(RelativesArray);
+
     return 0;
 }
 
