@@ -38,7 +38,10 @@ int main()
     int second;
     printf("Please give the second integer: \n");
     scanf("%d", &second);
-
+    SumDigit(first);
+    printf("The sum of the digits are: %d\n", SumDigit(first));
+    SumDigit(second);
+    printf("The sum of the digits are: %d\n", SumDigit(second));
     Equal(first, second);
 
     return 0;
