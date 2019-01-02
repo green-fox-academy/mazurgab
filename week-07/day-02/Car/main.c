@@ -1,22 +1,9 @@
 #include <stdio.h>
-#include <string.h>
 
 // Write a function that takes a car as an argument and prints all it's stats
 // If the car is a Tesla it should not print it's gas level
 
 enum car_type {VOLVO, TOYOTA, LAND_ROVER, TESLA};
-
-const char* get_car_type(type)
-{
-    switch (type)
-    {
-        case VOLVO: return "Volvo";
-        case TOYOTA: return "Toyota";
-        case LAND_ROVER: return "Land-Rover";
-        case TESLA: return "Tesla";
-    }
-    return "undefined";
-}
 
 typedef struct car {
 	enum car_type type;
@@ -24,7 +11,7 @@ typedef struct car {
 	int gas;
 }car_t;
 
-void print_stats(car_t car);
+void print_stats(car_t* car);
 
 int main()
 {
@@ -37,16 +24,21 @@ int main()
     car2.type = TESLA;
     car2.km = 120000;
 
-    print_stats(car1);
-    print_stats(car2);
+    print_stats(&car1);
+    print_stats(&car2);
 
 	return 0;
 }
 
-void print_stats(car_t car){
-    if(car.type == TESLA){
-        printf("The car's type is: Tesla, km is: %d\n", car.km);
-    }else{
-        printf("The car's type is: %s, km is: %d, gas: %d\n", get_car_type(car.type), car.km, car.gas);
+void print_stats(car_t* car){
+    switch (car->type){
+        case TESLA: printf("TESLA with %.d kms\n", car->km);
+            break;
+        case VOLVO: printf("VOLVO with %.d kms and %.d l of gas\n", car->km, car->gas);
+            break;
+        case TOYOTA: printf("TOYOTA with %.d kms and %.d l of gas\n", car->km, car->gas);
+            break;
+        case LAND_ROVER: printf("LAND ROVER with %.d kms and %.d l of gas\n", car->km, car->gas);
+            break;
     }
 }
