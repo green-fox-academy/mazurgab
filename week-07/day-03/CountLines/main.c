@@ -32,6 +32,6 @@ int count_lines(char* filename){
         printf("The file has: %d lines", counter);
         return counter;
     }else{
-        return 1;
+        return 0;
     }
 }
