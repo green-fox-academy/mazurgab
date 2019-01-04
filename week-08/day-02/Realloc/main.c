@@ -22,11 +22,15 @@ int main()
         sum += pointer[i];
     }
 
-    pointer = (int *) realloc(pointer, (number + 1) * sizeof(int));
-    pointer[number] = sum;
+    pointer = (int *) realloc(pointer, (number + sum) * sizeof(int));
 
-    for (int j = 0; j <number+1 ; ++j) {
-        printf("%d ,", pointer[j]);
+    for (int k = 0; k < sum; ++k) {
+        pointer[number + k] = k;
+    }
+
+
+    for (int j = 0; j <number+sum ; ++j) {
+        printf(" %d,", pointer[j]);
     }
 
     free(pointer);
