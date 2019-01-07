@@ -24,10 +24,11 @@ UART_HandleTypeDef uart_handle;
 GPIO_InitTypeDef led;
 GPIO_InitTypeDef led2;
 GPIO_InitTypeDef led3;
+GPIO_InitTypeDef led4;
 TIM_HandleTypeDef tim_handle;
 
-//TIM_HandleTypeDef tim_handle2;
-//TIM_OC_InitTypeDef tim_oc;
+TIM_HandleTypeDef tim_handle2;
+TIM_OC_InitTypeDef tim_oc;
 
 int main(void)
 {
@@ -91,19 +92,19 @@ int main(void)
 
     //-------------- PWM --------------------
 
-    /*
+
     __HAL_RCC_GPIOB_CLK_ENABLE();
-    led2.Pin = GPIO_PIN_4;
-    led2.Mode = GPIO_MODE_AF_PP;
-    led2.Pull = GPIO_PULLDOWN;
-    led2.Speed = GPIO_SPEED_HIGH;
-    led2.Alternate = GPIO_AF2_TIM3;
-    HAL_GPIO_Init(GPIOB, &led2);
+    led4.Pin = GPIO_PIN_4;
+    led4.Mode = GPIO_MODE_AF_PP;
+    led4.Pull = GPIO_PULLDOWN;
+    led4.Speed = GPIO_SPEED_HIGH;
+    led4.Alternate = GPIO_AF2_TIM3;
+    HAL_GPIO_Init(GPIOB, &led4);
 
     __HAL_RCC_TIM3_CLK_ENABLE();
     tim_handle2.Instance               = TIM3;
     tim_handle2.Init.Period            = 100;
-    tim_handle2.Init.Prescaler         = 10800;
+    tim_handle2.Init.Prescaler         = 1;
     tim_handle2.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
     tim_handle2.Init.CounterMode       = TIM_COUNTERMODE_UP;
     HAL_TIM_PWM_Init(&tim_handle2);
@@ -114,7 +115,7 @@ int main(void)
 
     HAL_TIM_Base_Start(&tim_handle2);
     HAL_TIM_PWM_Start(&tim_handle2, TIM_CHANNEL_1);
-*/
+
 
     printf("**** Hello in my application ****\r\n");
     while (1) {
@@ -137,6 +138,15 @@ int main(void)
 		}else if(cnt>=15000){ //yellow
 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_SET);
+		}
+
+		int brightness = ((10 * cnt / 1000)%100);
+		if(cnt>=0 && cnt <= 10000){
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
+			__HAL_TIM_SET_COMPARE(&tim_handle2, TIM_CHANNEL_1, brightness);
+		}else if(cnt>10000 && cnt <= 20000){
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
+			__HAL_TIM_SET_COMPARE(&tim_handle2, TIM_CHANNEL_1, 100-brightness);
 		}
 
         //int cnt2 = __HAL_TIM_GET_COUNTER(&tim_handle);
