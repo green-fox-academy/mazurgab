@@ -84,7 +84,7 @@ int read_statics(char* path, char** intervals, int** traffic){
         return -3;
     } else {
         while (fgets(line, sizeof line, file_pointer) != NULL) {
-            char *data = strtok(line, " ");
+            char *data = strtok(line, ";");
             if (line_count >= 1) {
                 //printf("reading line: %d\n ", line_count);
                 intervals[line_count - 1] = (char *) malloc((strlen(data) + 1) * sizeof(char));
