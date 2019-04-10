@@ -7,7 +7,58 @@ char* password_strength(char* password, int size);
 int check_digits(char* password, int size);
 int check_puncts(char* password, int size);
 
+extern int number;
+
+int by_value(int a);
+int by_pointer (int *b);
+
+typedef struct value{
+    int age;
+    char* first_name;
+}value_t;
+
 int main() {
+
+    char first[1];
+    strcpy(first, "Hello");
+    char second [6];
+    strcpy(second, "world");
+    strcat(first, second);
+    printf("%s\n", first);
+
+    printf("%d\n", sizeof(int));
+    printf("%d\n", sizeof(char*
+    ));
+    printf("%d\n", sizeof(value_t));
+
+    int array[5];
+    int* p;
+    p = array;
+    printf("%d\n", sizeof(array));
+    printf("%d\n", sizeof(p));
+
+    printf("%d\n", number);
+    int number2 = 1;
+
+    by_value(number2);
+
+    printf("%d\n", number2);
+
+    by_pointer (&number2);
+
+    printf("%d\n", number2);
+
+    switch(number2)
+    {
+        case 0:
+            printf("first");
+            break;
+        case 1:
+            printf("second");
+        case 2:
+            printf("third");
+            break;
+    }
 
     char password[50];
     printf("Please give the password: ");
@@ -50,4 +101,15 @@ int check_puncts(char* password, int size){
         }
     }
     return punct_counter;
+}
+
+int by_value(int a){
+    char *b;
+    char* p = malloc (sizeof(char)* 10);
+    a++;
+    return a;
+}
+int by_pointer (int *b){
+    (*b)++;
+    return *b;
 }

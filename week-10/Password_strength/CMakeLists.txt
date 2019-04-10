@@ -3,4 +3,4 @@ project(Password_strength C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(Password_strength main.c)
+add_executable(Password_strength main.c first.c)
