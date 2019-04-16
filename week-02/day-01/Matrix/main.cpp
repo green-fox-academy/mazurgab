@@ -4,21 +4,25 @@
 int main(int argc, char* args[]) {
 
     const int rows = 4;
+    const int columns = 3;
 
-    for (int i=0 ; i< (rows * rows); i++)
+    int matrix [rows][columns] = {};
+
+    for (int i=0 ; i< rows; i++)
     {
-        for (int j=1; j< rows + 1; j++)
+        for (int j=0; j< columns; j++)
         {
-            if i % j =
-
-
+            if(i == j){
+                matrix[i][j] = 1;
+                std::cout<<" "<<matrix[i][j]<<" ";
+            }else{
+                matrix[i][j] = 0;
+                std::cout<<" "<<matrix[i][j]<<" ";
+            }
         }
-
-
-
+        std::cout<<"\n";
     }
 
-    int matrix [rows][rows] = {};
     // - Create (dynamically) a two dimensional array
     //   with the following matrix. Use a loop!
     //   by dynamically, we mean here that you can change the size of the matrix
