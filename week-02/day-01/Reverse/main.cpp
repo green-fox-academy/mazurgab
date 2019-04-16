@@ -1,20 +1,18 @@
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 int main(int argc, char* args[]) {
 
     int aj[] = {3, 4, 5, 6, 7};
-    int b[5];
 
-    for (int j=0; j<5; j++) {
+    auto cpp_array_begin = std::begin(aj);
+    auto cpp_array_end = std::end(aj);
 
-        b[j] = aj[4-j];
-    }
+    std::reverse(cpp_array_begin, cpp_array_end);
 
-    for (int i=0; i<5; i++) {
-
-        aj[i] = b[i];
-        std::cout<<aj[i]<<std::endl;
+    for (int i = 0; i < (sizeof(aj)/sizeof(aj[0])); ++i) {
+        std::cout<<aj[i]<< ", ";
     }
 
     // - Create an array variable named `aj`
