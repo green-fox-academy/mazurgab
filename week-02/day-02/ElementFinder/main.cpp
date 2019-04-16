@@ -24,11 +24,8 @@ int main(int argc, char* args[])
 std::string containsSeven(const std::vector<int>& numbers)
 {
     for (int i=0; i < numbers.size(); ++i){
-
         if (numbers[i] == 7){
             return "Huurray";
-        }else{
-            i++;
         }
     }
     return "Noooooo";
@@ -36,9 +33,5 @@ std::string containsSeven(const std::vector<int>& numbers)
 
 std::string containsSeven_stdfind(const std::vector<int>& numbers)
 {
-    if (std::find(numbers.begin(), numbers.end(), 7) != numbers.end()) {
-        return "Huurray";
-    }else{
-        return "Nooooo";
-    }
+    return (std::find(numbers.begin(), numbers.end(), 7) != numbers.end()) ? "Hurray" : "Noooooo";
 }
