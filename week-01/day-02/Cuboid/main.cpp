@@ -2,23 +2,18 @@
 
 int main(int argc, char* args[]) {
 
-    int a;
-    int b;
-    int c;
+double sides[3];
+double volume = 1;
 
-    std::cout << "Give the cuboid a side's length" << std::endl;
-    std::cin >> a;
+    for (int i = 0; i < 3; ++i) {
+        int side;
+        std::cout << "Give the cuboid "<<i+1<<". side's length" << std::endl;
+        std::cin >> side;
+        volume *= side;
+        sides[i] = side;
+    }
 
-    std::cout << "Give the cuboid b side's length" << std::endl;
-    std::cin >> b;
-
-    std::cout << "Give the cuboid c side's length" << std::endl;
-    std::cin >> c;
-
-    int surface = (2 * a * b) + (2 * a * c) + (2 * b * c);
-    int volume = a * b * c;
-
-    std::cout << "Surface Area: " << surface << std::endl;
+    std::cout << "Surface Area: " << (2*sides[0]*sides[1]) + (2*sides[0]*sides[2] + (2*sides[1]*sides[2])) << std::endl;
     std::cout << "Volume: " << volume << std::endl;
 
     // Write a program that stores 3 sides of a cuboid as variables (doubles)
