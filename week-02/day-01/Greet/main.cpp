@@ -3,13 +3,12 @@
 
 
 
-std::string greet();
+void greet(std::string str);
 
 int main(int argc, char* args[]) {
 
     std::string a1 = "Greenfox";
-    std::cout<<greet()<<a1<<std::endl;
-
+    greet(a1);
 
     // - Create a string variable named `al` and assign the value `Greenfox` to it
     // - Create a function called `greet` that greets it's input parameter
@@ -19,8 +18,8 @@ int main(int argc, char* args[]) {
     return 0;
 }
 
-std::string greet (){
+void greet (std::string str){
 
-    std::string hello = "Greeting dear, ";
-    return hello;
+    std::cout<<"Greeting dear, "<<str<<std::endl;
+
 }
