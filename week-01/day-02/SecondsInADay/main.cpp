@@ -1,19 +1,20 @@
 #include <iostream>
+#include <ctime>
 
 int main(int argc, char* args[]) {
 
-    int currentHours = 14;
-    int currentMinutes = 34;
-    int currentSeconds = 42;
+    std::time_t t = std::time(nullptr);
+    std::tm* now = std::localtime(&t);
+    std::cout << (now->tm_hour) << ':'
+              << (now->tm_min) << ':'
+              <<  now->tm_sec
+              << "\n";
 
-    int Sec = 86400;
+    int currentHours = now->tm_hour;
+    int currentMin = now->tm_min;
+    int currentSec = now->tm_sec;
 
-    int Sec1 = currentHours * 60 * 60 ;
-    int Sec2 = currentMinutes * 60 ;
-
-    int RemSec = Sec - (Sec1 + Sec2 + currentSeconds);
-
-    std::cout << RemSec << std::endl;
+    std::cout <<"Remaining seconds today: "<< 86400 - ((currentHours * 3600) + (currentMin*60) + currentSec) << std::endl;
 
     // Write a program that prints the remaining seconds (as an integer) from a
     // day if the current time is represented by the variables
