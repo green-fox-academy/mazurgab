@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 std::vector<std::string> putSaturn(const std::vector<std::string>& planets);
 
@@ -25,8 +26,7 @@ int main(int argc, char* args[])
 std::vector<std::string> putSaturn(const std::vector<std::string>& planets)
 {
     std::vector<std::string> planet = planets;
-
-    planet.emplace_back("Saturn");
+    planet.insert(planet.begin() + 5, "Saturn");
 
     return planet;
 }
