@@ -6,7 +6,7 @@ int main(int argc, char* args[])
     std::string example("In a dishwasher far far away");
     std::string from = "dishwasher";
 
-    int start_pos = example.find(from);
+    uint32_t start_pos = example.find(from);
     example.replace(start_pos, from.length(), "galaxy");
 
     // I would like to replace "dishwasher" with "galaxy" in this example, but it has a problem.
